@@ -13,17 +13,15 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-        var horizontal = Input.GetAxis("Horizontal") * _speed * Time.deltaTime;
         var vertical = Input.GetAxis("Vertical") * _speed * Time.deltaTime;
-        transform.Translate(horizontal, 0f, vertical);
-        PlayAnimation(horizontal, vertical);
+        transform.Translate(0f, 0f, vertical);
+        PlayAnimation(vertical);
     }
 
-    private void PlayAnimation(float horizontal, float vertical)
+    private void PlayAnimation(float vertical)
     {
-        var inputHorizontal = !Mathf.Approximately(horizontal, 0f);
         var inputVertical = !Mathf.Approximately(vertical, 0f);
-        var isMove = inputHorizontal || inputVertical;
+        var isMove = inputVertical;
         _animator.SetBool("IsWalking", isMove);
     }
 }
