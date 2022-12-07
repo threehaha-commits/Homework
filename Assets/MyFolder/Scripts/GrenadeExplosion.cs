@@ -7,6 +7,9 @@ public class GrenadeExplosion : MonoBehaviour
         [SerializeField] private float _power;
         [SerializeField] private float _radius;
         [SerializeField] private float _timeBeforeExplosion = 1.5f;
+        [SerializeField] private ParticleSystem _explosionEffect;
+        private AudioSource _audioSource;
+        private AudioClip _explosionAudio;
         private Rigidbody _rigidbody;
         
         private void Start()
@@ -18,6 +21,8 @@ public class GrenadeExplosion : MonoBehaviour
         private void Explosion()
         {
                 _rigidbody.AddExplosionForce(_power, transform.position, _radius, _upwardsModifier, ForceMode.Impulse);
+                _explosionEffect?.Play();
+                _audioSource?.PlayOneShot(_explosionAudio);
                 Destroy(gameObject);
         }
 }
